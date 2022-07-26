@@ -10,23 +10,41 @@ function getPlayer() {
 
 function playRound(playerPick){
     let tries = 0;
-    let state = new Boolean(true);
+    let computerScore = 0;
+    let playerScore = 0;
 
-    while (tries < 5 && state) {
-        let res = "";
-        var playerPick = getPlayer();
-        var computerPick = getComputer();
+    while (tries < 5) {
+        var playerPick = getPlayer().toUpperCase();
+        var computerPick = getComputer().toUpperCase();
+        let lowerPlayer = playerPick.toLowerCase();
+        let lowerComputer = computerPick.toLowerCase();
 
-        if (playerPick == computerPick){
-            res = "Hit";
-            state = false;
+    
+        if (lowerPlayer == "paper" && lowerComputer == "rock"){
+            playerScore ++;
+        }
+        else if (lowerPlayer == "rock" && lowerComputer == "scissors"){
+            playerScore ++;
+        }
+        else if (lowerPlayer == "scissors" && lowerComputer == "paper"){
+            playerScore ++;
+        }
+        else if (lowerPlayer == lowerComputer){
+            tries --;
         }
         else{
-            res = "Try Again";
+            computerScore ++;
         }
 
-        alert(`Your pick was: ${playerPick}. Computer was ${computerPick}. Result is ${res}`);
+        alert(`Your pick was: ${playerPick}. Computer was ${computerPick}. Result is PLAYER: ${playerScore} and COMPUTER: ${computerScore}.`);
 
         tries ++;
+    }
+
+    if (playerScore > computerScore) {
+        alert("You WON :)")
+    }
+    else {
+        alert("You LOST :(")
     }
 }
